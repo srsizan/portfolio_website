@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samiun Rahman Sizan - Android Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: "#2563eb",
+              secondary: "#1e40af",
+              accent: "#3b82f6",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+      }
+      .gradient-bg::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent 40%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 60%
+        );
+        animation: shimmer 3s ease-in-out infinite;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .scroll-smooth {
+        scroll-behavior: smooth;
+      }
+
+      /* Enhanced Animations */
+      /* @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        } */
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes floatDelayed {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+
+      @keyframes spinSlow {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(59, 130, 246, 0.8),
+            0 0 40px rgba(59, 130, 246, 0.6);
+        }
+      }
+
+      .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .animate-fade-in-right {
+        animation: fadeInRight 0.8s ease-out 0.3s forwards;
+        opacity: 0;
+      }
+
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .animate-float-delayed {
+        animation: floatDelayed 3s ease-in-out infinite 0.5s;
+      }
+
+      .animate-spin-slow {
+        animation: spinSlow 20s linear infinite;
+      }
+
+      .animate-glow {
+        animation: glow 2s ease-in-out infinite;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #5a6fd8, #6a4190);
+      }
+
+      /* Enhanced project cards */
+      .project-card {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #667eea, transparent);
+        transition: left 0.5s;
+      }
+
+      .project-card:hover::before {
+        left: 100%;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Skill cards enhancement */
+      .skill-card {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+      }
+
+      .skill-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Loading animation */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+      }
+
+      .loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Enhanced navigation */
+      .nav-link {
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body class="scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="text-2xl font-bold text-gray-900">Samiun Sizan</div>
+          <div class="hidden md:flex space-x-8">
+            <a
+              href="#home"
+              class="nav-link text-gray-700 hover:text-primary transition-colors"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="nav-link text-gray-700 hover:text-primary transition-colors"
+              >About</a
+            >
+            <a
+              href="#experience"
+              class="nav-link text-gray-700 hover:text-primary transition-colors"
+              >Experience</a
+            >
+            <a
+              href="#projects"
+              class="nav-link text-gray-700 hover:text-primary transition-colors"
+              >Projects</a
+            >
+            <a
+              href="#skills"
+              class="nav-link text-gray-700 hover:text-primary transition-colors"
+              >Skills</a
+            >
+            <a
+              href="#contact"
+              class="nav-link text-gray-700 hover:text-primary transition-colors"
+              >Contact</a
+            >
+          </div>
+          <button id="mobile-menu-button" class="md:hidden p-2">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a
+            href="#home"
+            class="block px-3 py-2 text-gray-700 hover:text-primary"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="block px-3 py-2 text-gray-700 hover:text-primary"
+            >About</a
+          >
+          <a
+            href="#experience"
+            class="block px-3 py-2 text-gray-700 hover:text-primary"
+            >Experience</a
+          >
+          <a
+            href="#projects"
+            class="block px-3 py-2 text-gray-700 hover:text-primary"
+            >Projects</a
+          >
+          <a
+            href="#skills"
+            class="block px-3 py-2 text-gray-700 hover:text-primary"
+            >Skills</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-2 text-gray-700 hover:text-primary"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="min-h-screen flex items-center relative overflow-hidden"
+    >
+      <!-- Animated Background -->
+      <div class="absolute inset-0 gradient-bg">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <!-- Floating Elements -->
+        <div
+          class="absolute top-20 left-10 w-4 h-4 bg-white/20 rounded-full animate-bounce delay-100"
+        ></div>
+        <div
+          class="absolute top-40 right-20 w-6 h-6 bg-white/10 rounded-full animate-bounce delay-300"
+        ></div>
+        <div
+          class="absolute bottom-40 left-20 w-3 h-3 bg-white/30 rounded-full animate-bounce delay-500"
+        ></div>
+        <div
+          class="absolute bottom-20 right-10 w-5 h-5 bg-white/15 rounded-full animate-bounce delay-700"
+        ></div>
+
+        <!-- Geometric Shapes -->
+        <div
+          class="absolute top-1/4 left-1/4 w-32 h-32 border border-white/10 rotate-45 animate-spin-slow"
+        ></div>
+        <div
+          class="absolute bottom-1/4 right-1/4 w-24 h-24 border border-white/20 rotate-12 animate-pulse"
+        ></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="text-white animate-fade-in-up">
+            <div class="mb-6">
+              <span
+                class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-4"
+              >
+                👋 Hello, I'm
+              </span>
+            </div>
+            <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span
+                class="bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent"
+              >
+                Samiun Rahman
+              </span>
+              <span class="block text-4xl lg:text-5xl text-blue-200 mt-2"
+                >Sizan</span
+              >
+            </h1>
+            <div class="mb-6">
+              <div class="flex items-center space-x-3 mb-4">
+                <div
+                  class="w-1 h-8 bg-gradient-to-b from-blue-400 to-purple-400 rounded-full"
+                ></div>
+                <h2
+                  class="text-2xl lg:text-3xl font-light text-blue-100"
+                  id="typewriter"
+                >
+                  Android Software Engineer
+                </h2>
+              </div>
+            </div>
+            <p
+              class="text-lg lg:text-xl mb-8 text-blue-50 leading-relaxed max-w-xl"
+            >
+              Passionate about creating innovative mobile solutions using
+              cutting-edge technologies. Experienced in Android development, AI
+              integration, and cross-platform solutions.
+            </p>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-6 mb-8">
+              <div class="text-center">
+                <div class="text-3xl font-bold text-white mb-1">3+</div>
+                <div class="text-sm text-blue-200">Years Experience</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-white mb-1">15+</div>
+                <div class="text-sm text-blue-200">Projects Done</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-white mb-1">24</div>
+                <div class="text-sm text-blue-200">Years Old</div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+              <a
+                href="#contact"
+                class="group bg-white text-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 text-center flex items-center justify-center transform hover:scale-105 shadow-lg"
+              >
+                <i
+                  data-lucide="send"
+                  class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform"
+                ></i>
+                Get In Touch
+              </a>
+              <a
+                href="#projects"
+                class="group border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary transition-all duration-300 text-center flex items-center justify-center transform hover:scale-105"
+              >
+                <i
+                  data-lucide="eye"
+                  class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform"
+                ></i>
+                View Projects
+              </a>
+            </div>
+
+            <div class="flex space-x-6">
+              <a
+                href="https://github.com/srsizan"
+                target="_blank"
+                class="group text-white hover:text-blue-200 transition-all duration-300 transform hover:scale-110"
+              >
+                <i data-lucide="github" class="w-7 h-7"></i>
+              </a>
+              <a
+                href="https://linkedin.com/in/samiun-rahman-sizan-860806171"
+                target="_blank"
+                class="group text-white hover:text-blue-200 transition-all duration-300 transform hover:scale-110"
+              >
+                <i data-lucide="linkedin" class="w-7 h-7"></i>
+              </a>
+              <a
+                href="mailto:samiunsizan@gmail.com"
+                class="group text-white hover:text-blue-200 transition-all duration-300 transform hover:scale-110"
+              >
+                <i data-lucide="mail" class="w-7 h-7"></i>
+              </a>
+            </div>
+          </div>
+          <div class="flex justify-center lg:justify-end animate-fade-in-right">
+            <div class="relative">
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-full blur-3xl scale-110"
+              ></div>
+              <div
+                class="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-8 border-white/20 shadow-2xl backdrop-blur-sm transform hover:scale-105 transition-transform duration-500"
+              >
+                <img
+                  src="Samiun_Rahman_Sizan.jpg"
+                  alt="Samiun Rahman Sizan"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+                ></div>
+              </div>
+              <div
+                class="absolute -bottom-6 -right-6 bg-gradient-to-r from-white to-blue-50 text-primary px-6 py-3 rounded-xl shadow-xl border border-white/20 backdrop-blur-sm"
+              >
+                <div class="flex items-center space-x-2">
+                  <div
+                    class="w-3 h-3 bg-green-500 rounded-full animate-pulse"
+                  ></div>
+                  <span class="font-semibold">Available for Work</span>
+                </div>
+              </div>
+              <!-- Floating Tech Icons -->
+              <div
+                class="absolute -top-4 -left-4 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center animate-float"
+              >
+                <i data-lucide="smartphone" class="w-6 h-6 text-white"></i>
+              </div>
+              <div
+                class="absolute top-1/2 -right-8 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center animate-float-delayed"
+              >
+                <i data-lucide="code" class="w-6 h-6 text-white"></i>
+              </div>
+              <div
+                class="absolute -bottom-8 left-8 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center animate-float"
+              >
+                <i data-lucide="brain" class="w-6 h-6 text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce"
+      >
+        <div class="flex flex-col items-center space-y-2">
+          <span class="text-sm text-blue-200">Scroll Down</span>
+          <i data-lucide="chevron-down" class="w-6 h-6"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            I'm an enthusiast learner, impassioned to learn and analyze
+            technologies, eager to utilize latest technologies for making
+            people's life easier.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">
+              Professional Journey
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              With over 3 years of experience in software engineering, I
+              specialize in Android development using modern technologies like
+              Kotlin, Jetpack Compose, and clean architecture patterns. My
+              passion extends to AI/ML integration and cross-platform
+              development.
+            </p>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Currently working at BJIT Limited, I collaborate in Agile teams to
+              develop scalable Android applications and contribute to innovative
+              projects including AI-powered features and Metaverse development.
+            </p>
+
+            <div class="grid grid-cols-2 gap-6 mt-8">
+              <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2">15+</div>
+                <div class="text-gray-600">Projects Completed</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2">3+</div>
+                <div class="text-gray-600">Years Experience</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <div class="flex items-center mb-4">
+                <i
+                  data-lucide="graduation-cap"
+                  class="w-8 h-8 text-primary mr-4"
+                ></i>
+                <h4 class="text-xl font-semibold text-gray-900">Education</h4>
+              </div>
+              <div class="space-y-3">
+                <div>
+                  <h5 class="font-medium text-gray-900">
+                    B.Sc in Computer Science and Engineering
+                  </h5>
+                  <p class="text-gray-600">East West University (2018-2022)</p>
+                  <p class="text-sm text-gray-500">
+                    Major: Software Engineering
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <div class="flex items-center mb-4">
+                <i data-lucide="map-pin" class="w-8 h-8 text-primary mr-4"></i>
+                <h4 class="text-xl font-semibold text-gray-900">Location</h4>
+              </div>
+              <p class="text-gray-600">
+                Madrasa Road, Sayed Nagar, Vatara, Dhaka, 1212
+              </p>
+              <p class="text-gray-600">Bangladesh</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <div class="flex items-center mb-4">
+                <i data-lucide="globe" class="w-8 h-8 text-primary mr-4"></i>
+                <h4 class="text-xl font-semibold text-gray-900">Languages</h4>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">English</span>
+                  <span class="text-sm text-gray-500">IELTS 7</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Bengali</span>
+                  <span class="text-sm text-gray-500">Native</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            Professional Experience
+          </h2>
+          <p class="text-xl text-gray-600">
+            My journey in software engineering
+          </p>
+        </div>
+
+        <div class="space-y-8">
+          <!-- Current Position -->
+          <div
+            class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg border-l-4 border-primary"
+          >
+            <div
+              class="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4"
+            >
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                  Software Engineer
+                </h3>
+                <h4 class="text-xl font-semibold text-primary mb-2">
+                  BJIT Limited
+                </h4>
+                <p class="text-gray-600 mb-4">Dhaka, Bangladesh</p>
+              </div>
+              <div class="lg:text-right">
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800"
+                >
+                  March 2023 – Present
+                </span>
+              </div>
+            </div>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"
+                ></i>
+                Collaborated in teams using Agile methodology, with
+                responsibilities including sprint planning, code reviews, and
+                performance evaluation.
+              </li>
+              <li class="flex items-start">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"
+                ></i>
+                Developed and maintained multiple Android applications using
+                Kotlin, Jetpack Compose, and XML, focusing on scalable
+                architecture and optimized performance.
+              </li>
+              <li class="flex items-start">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"
+                ></i>
+                Contributed to AI and machine learning initiatives, including
+                data preprocessing, model integration, and performance
+                evaluation for intelligent features.
+              </li>
+              <li class="flex items-start">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"
+                ></i>
+                Participated in Metaverse development projects, applying 3D
+                modeling and simulation data for immersive user experiences.
+              </li>
+              <li class="flex items-start">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"
+                ></i>
+                Explored and implemented cross-platform app development using
+                Flutter and Dart, ensuring efficient UI rendering and data
+                handling across platforms.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Previous Position -->
+          <div class="bg-gray-50 p-8 rounded-lg border-l-4 border-gray-300">
+            <div
+              class="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4"
+            >
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                  Trainee Software Engineer
+                </h3>
+                <h4 class="text-xl font-semibold text-gray-700 mb-2">
+                  BJIT Academy
+                </h4>
+                <p class="text-gray-600 mb-4">Dhaka, Bangladesh</p>
+              </div>
+              <div class="lg:text-right">
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800"
+                >
+                  November 2022 – March 2023
+                </span>
+              </div>
+            </div>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-gray-500 mr-3 mt-0.5 flex-shrink-0"
+                ></i>
+                Completed intensive training in Android development with Kotlin
+                and XML, with emphasis on problem-solving, UI design, and
+                backend integration.
+              </li>
+              <li class="flex items-start">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-gray-500 mr-3 mt-0.5 flex-shrink-0"
+                ></i>
+                Successfully developed 2 functional mini projects, involving
+                real-time data management using APIs, and statistical
+                performance tracking.
+              </li>
+              <li class="flex items-start">
+                <i
+                  data-lucide="check-circle"
+                  class="w-5 h-5 text-gray-500 mr-3 mt-0.5 flex-shrink-0"
+                ></i>
+                Gained foundational experience in software engineering
+                principles, including algorithmic thinking and performance
+                analysis.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            Featured Projects
+          </h2>
+          <p class="text-xl text-gray-600">
+            Some of my notable work and contributions
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- AI Smart Tutor -->
+          <div class="project-card overflow-hidden">
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center"
+                >
+                  <i data-lucide="brain" class="w-6 h-6 text-white"></i>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-xl font-bold text-gray-900">
+                    AI Smart Tutor
+                  </h3>
+                  <p class="text-gray-600">Feb 2025 – Present</p>
+                </div>
+              </div>
+              <p class="text-gray-700 mb-4">
+                An AI-based Learning Management System with advanced features
+                for personalized education.
+              </p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Vector Database Implementation
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Feature Searching
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Feature Development
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium"
+                  >AI/ML</span
+                >
+                <span
+                  class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
+                  >Vector DB</span
+                >
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium"
+                  >LMS</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- MR Android APP -->
+          <div class="project-card overflow-hidden">
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center"
+                >
+                  <i data-lucide="smartphone" class="w-6 h-6 text-white"></i>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-xl font-bold text-gray-900">
+                    MR Android APP
+                  </h3>
+                  <p class="text-gray-600">Mar 2024 – Feb 2025</p>
+                </div>
+              </div>
+              <p class="text-gray-700 mb-4">
+                Android application developed for Chattogram WASA with
+                comprehensive utility management features.
+              </p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  UI Development
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Map Integration
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Database Integration
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Camera Module Integration
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium"
+                  >Android</span
+                >
+                <span
+                  class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
+                  >Maps</span
+                >
+                <span
+                  class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium"
+                  >Database</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Driver Customization -->
+          <div class="project-card overflow-hidden">
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center"
+                >
+                  <i data-lucide="car" class="w-6 h-6 text-white"></i>
+                </div>
+                <div class="ml-4">
+                  <h3 class="text-xl font-bold text-gray-900">
+                    Driver Customization
+                  </h3>
+                  <p class="text-gray-600">Aug 2023 – Jan 2024</p>
+                </div>
+              </div>
+              <p class="text-gray-700 mb-4">
+                Android application developed for Dhaka Metropolitan Police with
+                advanced tracking and management features.
+              </p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Map Integration
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Camera Module Integration
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  UI Development
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <i
+                    data-lucide="check"
+                    class="w-4 h-4 mr-2 text-green-500"
+                  ></i>
+                  Test Case Generation
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs font-medium"
+                  >Android</span
+                >
+                <span
+                  class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium"
+                  >Police System</span
+                >
+                <span
+                  class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium"
+                  >Testing</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research Works -->
+        <div class="mt-16">
+          <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Research Publications
+          </h3>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div
+              class="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500"
+            >
+              <div class="flex items-center mb-4">
+                <i
+                  data-lucide="file-text"
+                  class="w-8 h-8 text-green-500 mr-4"
+                ></i>
+                <h4 class="text-xl font-semibold text-gray-900">
+                  Power Consumption Analysis
+                </h4>
+              </div>
+              <h5 class="font-medium text-gray-700 mb-2">
+                Lowering and Analyzing the Power Consumption of Smartphones
+              </h5>
+              <p class="text-sm text-gray-600 mb-3">
+                Published in Intelligent Computing and Optimization (ICO 2023)
+              </p>
+              <p class="text-gray-700 text-sm">
+                Research analyzing smartphone power consumption patterns between
+                4G and WiFi usage, contributing to energy efficiency
+                improvements in mobile devices.
+              </p>
+            </div>
+
+            <div
+              class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500"
+            >
+              <div class="flex items-center mb-4">
+                <i data-lucide="cpu" class="w-8 h-8 text-blue-500 mr-4"></i>
+                <h4 class="text-xl font-semibold text-gray-900">
+                  ML Framework for Software V&V
+                </h4>
+              </div>
+              <h5 class="font-medium text-gray-700 mb-2">
+                Building a Machine Learning Framework for Software Validation
+                and Verification
+              </h5>
+              <p class="text-sm text-gray-600 mb-3">Research in Progress</p>
+              <p class="text-gray-700 text-sm">
+                Combining machine learning and software development to reduce
+                development costs and improve source code quality through
+                automated validation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section
+      id="skills"
+      class="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            Technical Skills
+          </h2>
+          <p class="text-xl text-gray-600">
+            Technologies and tools I work with
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Android Development -->
+          <div
+            class="group skill-card relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-green-200/50 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+          >
+            <!-- Animated background gradient -->
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-green-50/50 via-emerald-50/30 to-green-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+
+            <!-- Floating particles effect -->
+            <div
+              class="absolute top-4 right-4 w-2 h-2 bg-green-400 rounded-full animate-pulse opacity-60"
+            ></div>
+            <div
+              class="absolute bottom-6 left-6 w-1 h-1 bg-emerald-500 rounded-full animate-bounce opacity-70"
+            ></div>
+
+            <div class="relative z-10">
+              <div class="flex items-center mb-8">
+                <div class="relative">
+                  <div
+                    class="w-16 h-16 bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+                  >
+                    <i data-lucide="smartphone" class="w-8 h-8 text-white"></i>
+                  </div>
+                  <div
+                    class="absolute -top-1 -right-1 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <i data-lucide="zap" class="w-3 h-3 text-white"></i>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3
+                    class="text-2xl font-bold text-gray-900 group-hover:text-green-700 transition-colors duration-300"
+                  >
+                    Android Development
+                  </h3>
+                  <p class="text-sm text-gray-500 mt-1">Mobile Innovation</p>
+                </div>
+              </div>
+
+              <div class="space-y-5">
+                <!-- Jetpack Compose -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-green-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Jetpack Compose
+                    </span>
+                    <span class="text-sm font-bold text-green-600">80%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="80"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Kotlin -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-green-600 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Kotlin
+                    </span>
+                    <span class="text-sm font-bold text-green-600">90%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-green-600 to-emerald-600 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="90"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Retrofit & Dagger Hilt -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-green-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Retrofit & Dagger Hilt
+                    </span>
+                    <span class="text-sm font-bold text-green-600">85%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="85"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Clean Architecture -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-green-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Clean Architecture
+                    </span>
+                    <span class="text-sm font-bold text-green-600">82%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="82"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 pt-6 border-t border-green-200/50">
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                    >Java</span
+                  >
+                  <span
+                    class="px-3 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                    >XML</span
+                  >
+                  <span
+                    class="px-3 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                    >MVVM</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI & CS Fundamentals -->
+          <div
+            class="group skill-card relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-blue-200/50 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+          >
+            <!-- Animated background gradient -->
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-indigo-50/30 to-blue-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+
+            <!-- Floating particles effect -->
+            <div
+              class="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full animate-pulse opacity-60"
+            ></div>
+            <div
+              class="absolute bottom-6 left-6 w-1 h-1 bg-indigo-500 rounded-full animate-bounce opacity-70"
+            ></div>
+
+            <div class="relative z-10">
+              <div class="flex items-center mb-8">
+                <div class="relative">
+                  <div
+                    class="w-16 h-16 bg-gradient-to-br from-blue-500 via-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+                  >
+                    <i data-lucide="brain" class="w-8 h-8 text-white"></i>
+                  </div>
+                  <div
+                    class="absolute -top-1 -right-1 w-6 h-6 bg-blue-400 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <i data-lucide="cpu" class="w-3 h-3 text-white"></i>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3
+                    class="text-2xl font-bold text-gray-900 group-hover:text-blue-700 transition-colors duration-300"
+                  >
+                    AI & CS Fundamentals
+                  </h3>
+                  <p class="text-sm text-gray-500 mt-1">
+                    Intelligent Solutions
+                  </p>
+                </div>
+              </div>
+
+              <div class="space-y-5">
+                <!-- TensorFlow & PyTorch -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-blue-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      TensorFlow & PyTorch
+                    </span>
+                    <span class="text-sm font-bold text-blue-600">65%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="65"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Data Structures & Algorithms -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-blue-600 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Data Structures & Algorithms
+                    </span>
+                    <span class="text-sm font-bold text-blue-600">88%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="88"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- OOP & SOLID Principles -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-blue-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      OOP & SOLID Principles
+                    </span>
+                    <span class="text-sm font-bold text-blue-600">92%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="92"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Machine Learning -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-blue-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Machine Learning
+                    </span>
+                    <span class="text-sm font-bold text-blue-600">70%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="70"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 pt-6 border-t border-blue-200/50">
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                    >NumPy</span
+                  >
+                  <span
+                    class="px-3 py-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                    >Scikit-learn</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional Competencies -->
+          <div
+            class="group skill-card relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-purple-200/50 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+          >
+            <!-- Animated background gradient -->
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-violet-50/30 to-purple-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+
+            <!-- Floating particles effect -->
+            <div
+              class="absolute top-4 right-4 w-2 h-2 bg-purple-400 rounded-full animate-pulse opacity-60"
+            ></div>
+            <div
+              class="absolute bottom-6 left-6 w-1 h-1 bg-violet-500 rounded-full animate-bounce opacity-70"
+            ></div>
+
+            <div class="relative z-10">
+              <div class="flex items-center mb-8">
+                <div class="relative">
+                  <div
+                    class="w-16 h-16 bg-gradient-to-br from-purple-500 via-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+                  >
+                    <i data-lucide="users" class="w-8 h-8 text-white"></i>
+                  </div>
+                  <div
+                    class="absolute -top-1 -right-1 w-6 h-6 bg-purple-400 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <i data-lucide="star" class="w-3 h-3 text-white"></i>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <h3
+                    class="text-2xl font-bold text-gray-900 group-hover:text-purple-700 transition-colors duration-300"
+                  >
+                    Professional Skills
+                  </h3>
+                  <p class="text-sm text-gray-500 mt-1">
+                    Soft Skills & Leadership
+                  </p>
+                </div>
+              </div>
+
+              <div class="space-y-5">
+                <!-- Team Collaboration -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-purple-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Team Collaboration
+                    </span>
+                    <span class="text-sm font-bold text-purple-600">95%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-purple-500 to-violet-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="95"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Agile Methodology -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-purple-600 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Agile Methodology
+                    </span>
+                    <span class="text-sm font-bold text-purple-600">85%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-purple-600 to-violet-600 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="85"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Problem Solving -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-purple-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Problem Solving
+                    </span>
+                    <span class="text-sm font-bold text-purple-600">93%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-purple-500 to-violet-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="93"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Tech Adaptation -->
+                <div class="group/skill">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-700 font-semibold flex items-center">
+                      <div
+                        class="w-3 h-3 bg-purple-500 rounded-full mr-3 group-hover/skill:animate-pulse"
+                      ></div>
+                      Tech Adaptation
+                    </span>
+                    <span class="text-sm font-bold text-purple-600">90%</span>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 rounded-full h-2 overflow-hidden"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-purple-500 to-violet-500 rounded-full skill-progress"
+                      style="width: 0%"
+                      data-width="90"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 pt-6 border-t border-purple-200/50">
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-2 bg-gradient-to-r from-purple-100 to-violet-100 text-purple-800 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                    >APIs & SDKs</span
+                  >
+                  <span
+                    class="px-3 py-2 bg-gradient-to-r from-purple-100 to-violet-100 text-purple-800 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                    >SDLC</span
+                  >
+                  <span
+                    class="px-3 py-2 bg-gradient-to-r from-purple-100 to-violet-100 text-purple-800 rounded-xl text-xs font-medium hover:scale-105 transition-transform duration-200 cursor-default"
+                    >Leadership</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Let's Work Together</h2>
+          <p class="text-xl text-gray-300">
+            Ready to bring your next mobile project to life? Let's connect!
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
+          >
+            <!-- Email Card -->
+            <div
+              class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300 shadow-lg"
+            >
+              <div
+                class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i data-lucide="mail" class="w-8 h-8 text-white"></i>
+              </div>
+              <h4 class="font-semibold text-white mb-2">Email</h4>
+              <a
+                href="mailto:samiunsizan@gmail.com"
+                class="text-blue-100 hover:text-white transition-colors text-sm break-all"
+              >
+                samiunsizan@gmail.com
+              </a>
+            </div>
+
+            <!-- Phone Card -->
+            <div
+              class="bg-gradient-to-br from-green-500 to-green-600 p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300 shadow-lg"
+            >
+              <div
+                class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i data-lucide="phone" class="w-8 h-8 text-white"></i>
+              </div>
+              <h4 class="font-semibold text-white mb-2">Phone</h4>
+              <a
+                href="tel:+8801531707527"
+                class="text-green-100 hover:text-white transition-colors text-sm"
+              >
+                +88 01531707527
+              </a>
+            </div>
+
+            <!-- Location Card -->
+            <div
+              class="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300 shadow-lg"
+            >
+              <div
+                class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i data-lucide="map-pin" class="w-8 h-8 text-white"></i>
+              </div>
+              <h4 class="font-semibold text-white mb-2">Location</h4>
+              <p class="text-purple-100 text-sm leading-relaxed">
+                Dhaka, Bangladesh
+              </p>
+            </div>
+
+            <!-- Age Card -->
+            <div
+              class="bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300 shadow-lg"
+            >
+              <div
+                class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i data-lucide="calendar" class="w-8 h-8 text-white"></i>
+              </div>
+              <h4 class="font-semibold text-white mb-2">Age</h4>
+              <p class="text-orange-100 text-sm">24 Years Old</p>
+            </div>
+          </div>
+
+          <!-- Social Media Section -->
+          <div class="text-center">
+            <h3 class="text-2xl font-bold mb-8">Connect With Me</h3>
+            <div class="flex justify-center space-x-6 mb-8">
+              <a
+                href="https://github.com/srsizan"
+                target="_blank"
+                class="group relative w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-all duration-300 transform hover:scale-110 shadow-lg"
+              >
+                <i data-lucide="github" class="w-8 h-8 text-white"></i>
+                <span
+                  class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                  >GitHub</span
+                >
+              </a>
+              <a
+                href="https://linkedin.com/in/samiun-rahman-sizan-860806171"
+                target="_blank"
+                class="group relative w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 shadow-lg"
+              >
+                <i data-lucide="linkedin" class="w-8 h-8 text-white"></i>
+                <span
+                  class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                  >LinkedIn</span
+                >
+              </a>
+              <a
+                href="mailto:samiunsizan@gmail.com"
+                class="group relative w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-all duration-300 transform hover:scale-110 shadow-lg"
+              >
+                <i data-lucide="mail" class="w-8 h-8 text-white"></i>
+                <span
+                  class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                  >Email</span
+                >
+              </a>
+            </div>
+
+            <!-- Call to Action -->
+            <div
+              class="bg-gradient-to-r from-primary to-secondary p-8 rounded-2xl"
+            >
+              <h4 class="text-2xl font-bold text-white mb-4">
+                Ready to Start a Project?
+              </h4>
+              <p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+                I'm always excited to work on innovative mobile projects and
+                explore new technologies. Let's discuss how we can bring your
+                ideas to life!
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="mailto:samiunsizan@gmail.com"
+                  class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
+                >
+                  <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                  Send Email
+                </a>
+                <a
+                  href="tel:+8801531707527"
+                  class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors inline-flex items-center justify-center"
+                >
+                  <i data-lucide="phone" class="w-5 h-5 mr-2"></i>
+                  Call Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-gray-400">
+            © 2025 Samiun Rahman Sizan. All rights reserved.
+          </p>
+          <p class="text-gray-500 mt-2">
+            Crafted with passion for innovative mobile solutions
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
